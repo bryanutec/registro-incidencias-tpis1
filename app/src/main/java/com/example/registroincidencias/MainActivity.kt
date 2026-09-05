@@ -20,8 +20,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.registroincidencias.ui.theme.RegistroIncidenciasTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Scaffold
+import androidx.compose.ui.text.style.TextAlign
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,42 +39,78 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun RegistroIncidenciasApp() {
+
+    var titulo by remember {
+        mutableStateOf("")
+    }
+
+    var descripcion by remember {
+        mutableStateOf("")
+    }
+
+    var mensaje by remember {
+        mutableStateOf("Sin reportes")
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        verticalArrangement = Arrangement.Center
     ) {
+
         Text(
-            text = "Asistencia a clases",
-            style = MaterialTheme.typography.headlineMedium
+            text = "Registro de incidencias",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
+
         Spacer(modifier = Modifier.height(12.dp))
+
         Text(
-            text = "Registra la asistencia diaria de los estudiantes a sus clases de " +
-                    "Técnicas de Producción Industrial de Software."
+            text = "Ingresa el título y una breve descripción de la incidencia."
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = titulo,
+            onValueChange = { titulo = it },
+            label = { Text("Título") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        OutlinedTextField(
+            value = descripcion,
+            onValueChange = { descripcion = it },
+            label = { Text("Descripción") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
         Spacer(modifier = Modifier.height(24.dp))
-        Card(modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = "Estado:",
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Text(text = "Aún no hay asistencias registradas.")
-            }
+
+        Button(
+            onClick = {
+                mensaje = "Reporte creado: $titulo"
+            },
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            Text("Crear reporte")
         }
+
         Spacer(modifier = Modifier.height(24.dp))
-        Button(onClick = { /* Se implementará en una unidad posterior */ }) {
-            Text(text = "Marcar asistencia")
-        }
-        Spacer(modifier = Modifier.height(24.dp))
+
         Text(
-            text = "Prototipo Inicial - Unidad 1."
+            text = mensaje,
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            textAlign = TextAlign.Center
         )
+
     }
 }
 
