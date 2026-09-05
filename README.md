@@ -11,7 +11,8 @@
 
 ## Estado actual
 
-Pantalla inicial de la aplicación con espacios para agregar texto y visualización de retroalimentación posterior a presionar botón.
+Pantalla inicial de la aplicación.
+
 ### Como abrir el proyecto
 
 Ejecutar con Android Studio en un dispositivo virtual de tamaño medio con API 37.1.
