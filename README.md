@@ -11,7 +11,7 @@
 
 ## Estado actual
 
-Pantalla inicial de la aplicación.
+Pantalla inicial de la aplicación con espacios para agregar texto y visualización de retroalimentación posterior a presionar botón.
 
 ### Como abrir el proyecto
 
