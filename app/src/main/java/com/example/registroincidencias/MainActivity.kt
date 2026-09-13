@@ -96,7 +96,11 @@ fun RegistroIncidenciasApp() {
 
         Button(
             onClick = {
-                mensaje = "Reporte creado: $titulo"
+                mensaje = if (titulo.isBlank() || descripcion.isBlank()) {
+                    "Error: ingresa información en los campos"
+                } else {
+                    "Reporte creado: $titulo"
+                }
             },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {

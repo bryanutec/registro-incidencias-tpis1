@@ -11,7 +11,8 @@
 
 ## Estado actual
 
-Pantalla inicial de la aplicación.
+Pantalla inicial de la aplicación la cual contiene dos campos de 
+ingreso de texto y un botón para validar la información ingresada.
 
 ### Como abrir el proyecto
 
