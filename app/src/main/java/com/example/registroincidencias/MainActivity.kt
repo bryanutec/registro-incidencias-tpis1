@@ -26,7 +26,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Scaffold
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 
 class MainActivity : ComponentActivity() {
@@ -55,6 +59,10 @@ fun RegistroIncidenciasApp() {
         mutableStateOf("Sin reportes")
     }
 
+    var prioridad by remember {
+        mutableStateOf("No seleccionada")
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -80,8 +88,13 @@ fun RegistroIncidenciasApp() {
             value = titulo,
             onValueChange = { titulo = it },
             label = { Text("Título") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences,
+                imeAction = ImeAction.Next
+            )
         )
+
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -89,10 +102,67 @@ fun RegistroIncidenciasApp() {
             value = descripcion,
             onValueChange = { descripcion = it },
             label = { Text("Descripción") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences
+            )
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "Selecciona la prioridad:"
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    prioridad = "Alta"
+                }
+        ) {
+            Text(
+                text = "Prioridad alta",
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    prioridad = "Media"
+                }
+        ) {
+            Text(
+                text = "Prioridad media",
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    prioridad = "Baja"
+                }
+        ) {
+            Text(
+                text = "Prioridad baja",
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+        Text(
+            text = "Prioridad seleccionada: $prioridad",
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = {
