@@ -32,6 +32,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +70,50 @@ fun RegistroIncidenciasApp() {
         mutableStateOf("No seleccionada")
     }
 
+    val context = LocalContext.current
+
+    val sensorManager = remember {
+        context.getSystemService(Context.SENSOR_SERVICE) as? SensorManager
+    }
+
+    val acelerometro = remember {
+        sensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    }
+
+    var x by remember { mutableStateOf(0f) }
+    var y by remember { mutableStateOf(0f) }
+    var z by remember { mutableStateOf(0f) }
+
+    DisposableEffect(sensorManager, acelerometro) {
+        if (sensorManager != null && acelerometro != null) {
+
+            val listener = object : SensorEventListener {
+                override fun onSensorChanged(event: SensorEvent) {
+                    x = event.values[0]
+                    y = event.values[1]
+                    z = event.values[2]
+                }
+
+                override fun onAccuracyChanged(
+                    sensor: Sensor?,
+                    accuracy: Int
+                ) {}
+            }
+
+            sensorManager.registerListener(
+                listener,
+                acelerometro,
+                SensorManager.SENSOR_DELAY_NORMAL
+            )
+
+            onDispose {
+                sensorManager.unregisterListener(listener)
+            }
+        } else {
+            onDispose {}
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -81,6 +132,19 @@ fun RegistroIncidenciasApp() {
         Text(
             text = "Ingresa el título y una breve descripción de la incidencia."
         )
+
+        Text(
+            text = "Acelerómetro: ${
+                if (acelerometro != null) "Disponible"
+                else "No disponible"
+            }"
+        )
+
+        if (acelerometro != null) {
+            Text("X: $x m/s²")
+            Text("Y: $y m/s²")
+            Text("Z: $z m/s²")
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
