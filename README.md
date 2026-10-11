@@ -12,7 +12,8 @@
 ## Estado actual
 
 Pantalla inicial de la aplicación la cual contiene dos campos de 
-ingreso de texto, menú seleccionador de prioridad y botón para validar la información ingresada.
+ingreso de texto, menú seleccionador de prioridad, botón para validar la información ingresada 
+y muestra de funcionamiento de acelerómetro.
 
 
 Durante la primer semana de octubre:
@@ -22,6 +23,7 @@ Durante la primer semana de octubre:
 - Se agregó una selección de prioridad mediante elementos táctiles.
 - Se implementó retroalimentación visible de la prioridad seleccionada.
 - Se mantuvo la validación de los campos antes de crear un reporte.
+- Se añadió la funcionalidad del acelerómetro y se muestra en pantalla.
 
 ### Como abrir el proyecto
 
