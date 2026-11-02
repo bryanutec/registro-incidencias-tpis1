@@ -16,14 +16,32 @@ ingreso de texto, menú seleccionador de prioridad, botón para validar la infor
 y muestra de funcionamiento de acelerómetro.
 
 
-Durante la primer semana de octubre:
-- Se configuró los campo con KeyboardOptions.
-- Se agregó capitalización automática.
-- Se configuró la acción IME "Next".
-- Se agregó una selección de prioridad mediante elementos táctiles.
-- Se implementó retroalimentación visible de la prioridad seleccionada.
-- Se mantuvo la validación de los campos antes de crear un reporte.
-- Se añadió la funcionalidad del acelerómetro y se muestra en pantalla.
+## Durante la primer semana de noviembre:
+
+Se implementaron registros mediante Log.d para observar
+el ciclo de vida de MainActivity:
+
+- onCreate()
+- onStart()
+- onResume()
+- onPause()
+- onStop()
+- onDestroy()
+- onRestart()
+
+Se utilizó la etiqueta TPIS1_LIFECYCLE para identificar
+los mensajes en Logcat.
+
+## Pruebas realizadas:
+
+1. Apertura inicial:
+   onCreate, onStart, onResume.
+
+2. Presionar Home y regresar:
+   onPause, onStop, onRestart, onStart, onResume.
+
+3. Rotación de pantalla:
+   onPause, onStop, onDestroy.
 
 ### Como abrir el proyecto
 
